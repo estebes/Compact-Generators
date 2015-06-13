@@ -1,0 +1,27 @@
+[
+{
+"modid": "CompactIC2Generators",
+"name": "Compact IC2 Generators",
+"description": "Stuff",
+"version": "@VERSION@",
+"mcversion": "1.7.10",
+"url": "",
+"updateUrl": "",
+"authorList": [
+"estebes"
+],
+"credits": "People",
+"logoFile": "",
+"screenshots": [
+],
+"parent":"",
+"requiredMods": [
+"IC2@[2.2.736,)",
+"Forge@[something,)"
+],
+"dependencies": [
+"IC2@[2.2.736,)"
+],
+"useDependencyInformation" : "true"
+}
+]

@@ -1,6 +1,9 @@
 package com.estebes.compactic2generators.tileentity;
 
+import com.estebes.compactic2generators.network.PacketHandler;
+import com.estebes.compactic2generators.network.message.MessageTileEntitySimpleGenerator;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -35,9 +38,9 @@ public class TileEntitySimpleGenerator extends TileEntity
         return this.isWorking;
     }
 
-    public void setWorkingState()
+    public void setWorkingState(Boolean isWorking)
     {
-        this.isWorking = (this.isWorking == false) ? true : false;
+        this.isWorking = isWorking;
     }
 
     @Override
@@ -60,5 +63,11 @@ public class TileEntitySimpleGenerator extends TileEntity
         super.writeToNBT(nbtTagCompound);
         nbtTagCompound.setByte("teDirection", (byte) this.orientation.ordinal());
         nbtTagCompound.setBoolean("teWorking", this.isWorking);
+    }
+
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntitySimpleGenerator(this));
     }
 }

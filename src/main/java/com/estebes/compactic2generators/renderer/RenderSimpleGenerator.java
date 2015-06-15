@@ -35,11 +35,6 @@ public class RenderSimpleGenerator extends TileEntitySpecialRenderer
             }
 
             this.bindTexture((((TileEntitySimpleGenerator) tileEntity).getWorkingState() == false) ? simpleGeneratorTexture : simpleGeneratorWorkingTexture);
-            //System.out.println(((TileEntitySimpleGenerator) tileEntity).getWorkingState());
-            if(((TileEntitySimpleGenerator) tileEntity).getWorkingState() == true)
-            {
-                System.out.println("True");
-            }
 
             GL11.glPushMatrix();
 

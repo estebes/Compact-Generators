@@ -3,6 +3,7 @@ package com.estebes.compactic2generators;
 import com.estebes.compactic2generators.init.BlockInit;
 import com.estebes.compactic2generators.init.RecipeInit;
 import com.estebes.compactic2generators.init.TileEntityInit;
+import com.estebes.compactic2generators.network.PacketHandler;
 import com.estebes.compactic2generators.proxy.ServerProxy;
 import com.estebes.compactic2generators.reference.Reference;
 import cpw.mods.fml.common.Mod;
@@ -25,6 +26,7 @@ public class CompactIC2Genenators
     @EventHandler
     public void preInit(FMLPreInitializationEvent preinit)
     {
+        PacketHandler.init();
 
         BlockInit.init();
     }

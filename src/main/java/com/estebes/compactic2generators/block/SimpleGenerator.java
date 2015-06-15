@@ -119,9 +119,8 @@ public class SimpleGenerator extends BlockContainer
         TileEntity tileEntitySimpleGenerator = world.getTileEntity(x, y, z);
         if (tileEntitySimpleGenerator != null && tileEntitySimpleGenerator instanceof TileEntitySimpleGenerator)
         {
-            ((TileEntitySimpleGenerator) tileEntitySimpleGenerator).setWorkingState();
+            ((TileEntitySimpleGenerator) tileEntitySimpleGenerator).setWorkingState((((TileEntitySimpleGenerator) tileEntitySimpleGenerator).getWorkingState() == false ? true : false));
             world.markBlockForUpdate(x, y ,z);
-            System.out.println(((TileEntitySimpleGenerator) tileEntitySimpleGenerator).getWorkingState());
         }
         return true;
     }

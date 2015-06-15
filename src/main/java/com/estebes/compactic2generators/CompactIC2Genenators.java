@@ -1,32 +1,47 @@
 package com.estebes.compactic2generators;
 
+import com.estebes.compactic2generators.init.BlockInit;
+import com.estebes.compactic2generators.init.RecipeInit;
+import com.estebes.compactic2generators.init.TileEntityInit;
+import com.estebes.compactic2generators.proxy.ServerProxy;
+import com.estebes.compactic2generators.reference.Reference;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = "CompactIC2Generators", name = "Compact IC2 Generators", version = "1.7.10-0.0.1")
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 public class CompactIC2Genenators
 {
-    @Mod.Instance
+    @SidedProxy(clientSide = Reference.PROXY_CLIENT, serverSide = Reference.PROXY_SERVER)
+    public static ServerProxy proxy;
+
+    @Instance(Reference.MOD_ID)
     public static CompactIC2Genenators instance;
 
-    @Mod.EventHandler
+    @EventHandler
     public void preInit(FMLPreInitializationEvent preinit)
     {
 
+        BlockInit.init();
     }
 
-    @Mod.EventHandler
+    @EventHandler
     public void init(FMLInitializationEvent init)
     {
+        TileEntityInit.init();
 
+        RecipeInit.init();
+
+        proxy.registerRenderInformation();
     }
 
-    @Mod.EventHandler
+    @EventHandler
     public void postInit(FMLPostInitializationEvent postinit)
     {
-
     }
 
 }

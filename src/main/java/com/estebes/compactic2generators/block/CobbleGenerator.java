@@ -2,7 +2,7 @@ package com.estebes.compactic2generators.block;
 
 import com.estebes.compactic2generators.CompactIC2Genenators;
 import com.estebes.compactic2generators.reference.Reference;
-import com.estebes.compactic2generators.tileentity.TileEntitySimpleGenerator;
+import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -18,11 +18,11 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class SimpleGenerator extends BlockContainer
+public class CobbleGenerator extends BlockContainer
 {
     private boolean isWorking = false;
 
-    public SimpleGenerator()
+    public CobbleGenerator()
     {
         super(Material.iron);
         this.setHardness(3.0F);
@@ -34,7 +34,7 @@ public class SimpleGenerator extends BlockContainer
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
-        return new TileEntitySimpleGenerator();
+        return new TileEntityCobbleGenerator();
     }
 
     @Override
@@ -101,7 +101,7 @@ public class SimpleGenerator extends BlockContainer
             {
                 direction = ForgeDirection.WEST.ordinal();
             }
-            ((TileEntitySimpleGenerator) world.getTileEntity(x, y, z)).setOrientation(direction);
+            ((TileEntityCobbleGenerator) world.getTileEntity(x, y, z)).setOrientation(direction);
         }
     }
 
@@ -117,12 +117,10 @@ public class SimpleGenerator extends BlockContainer
         {
             return true;
         }
-        TileEntity tileEntitySimpleGenerator = world.getTileEntity(x, y, z);
-        if (tileEntitySimpleGenerator != null && tileEntitySimpleGenerator instanceof TileEntitySimpleGenerator)
+        TileEntity tileEntityCobbleGenerator = world.getTileEntity(x, y, z);
+        if (tileEntityCobbleGenerator != null && tileEntityCobbleGenerator instanceof TileEntityCobbleGenerator)
         {
-            player.openGui(CompactIC2Genenators.instance, 0, world, x, y, z);
-            //((TileEntitySimpleGenerator) tileEntitySimpleGenerator).setWorkingState((((TileEntitySimpleGenerator) tileEntitySimpleGenerator).getWorkingState() == false ? true : false));
-            //world.markBlockForUpdate(x, y ,z);
+            player.openGui(CompactIC2Genenators.instance, 1, world, x, y, z);
         }
         return true;
     }

@@ -1,8 +1,11 @@
 package com.estebes.compactic2generators.proxy;
 
 import com.estebes.compactic2generators.init.BlockInit;
-import com.estebes.compactic2generators.renderer.ItemRendererSimpleGenerator;
-import com.estebes.compactic2generators.renderer.RenderSimpleGenerator;
+import com.estebes.compactic2generators.renderer.blocks.RenderCobbleGenerator;
+import com.estebes.compactic2generators.renderer.items.ItemRendererCobbleGenerator;
+import com.estebes.compactic2generators.renderer.items.ItemRendererSimpleGenerator;
+import com.estebes.compactic2generators.renderer.blocks.RenderSimpleGenerator;
+import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
 import com.estebes.compactic2generators.tileentity.TileEntitySimpleGenerator;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import net.minecraft.item.Item;
@@ -14,5 +17,7 @@ public class ClientProxy extends ServerProxy
     {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySimpleGenerator.class, new RenderSimpleGenerator());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockInit.simpleGenerator), new ItemRendererSimpleGenerator());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCobbleGenerator.class, new RenderCobbleGenerator());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockInit.cobbleGenerator), new ItemRendererCobbleGenerator());
     }
 }

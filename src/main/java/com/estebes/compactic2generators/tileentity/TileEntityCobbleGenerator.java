@@ -138,11 +138,11 @@ public class TileEntityCobbleGenerator extends TileEntity implements ISidedInven
         nbtTagCompound.setInteger("teEnergyUsed", this.energyUsed);
     }
 
-    @Override
+    /*@Override
     public Packet getDescriptionPacket()
     {
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityCobbleGenerator(this));
-    }
+        //return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityCobbleGenerator(this));
+    }*/
 
     @Override
     public int getSizeInventory() {

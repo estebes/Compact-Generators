@@ -3,6 +3,7 @@ package com.estebes.compactic2generators.block;
 import com.estebes.compactic2generators.CompactIC2Genenators;
 import com.estebes.compactic2generators.reference.Reference;
 import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
+import com.estebes.compactic2generators.tileentity.TileEntityCobbleMachine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.item.IC2Items;
@@ -28,21 +29,21 @@ import java.util.Random;
 
 public class CobbleGenerator extends BlockContainer
 {
-    private boolean isWorking = false;
+    private final int machineTier;
 
-    public CobbleGenerator()
+    public CobbleGenerator(int machineTier)
     {
         super(Material.iron);
         this.setHardness(3.0F);
         this.setStepSound(soundTypeMetal);
         this.setCreativeTab(CreativeTabs.tabRedstone);
-        this.isWorking = true;
+        this.machineTier = machineTier;
     }
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
-        return new TileEntityCobbleGenerator();
+        return new TileEntityCobbleMachine(this.machineTier);
     }
 
     @Override
@@ -109,7 +110,7 @@ public class CobbleGenerator extends BlockContainer
             {
                 direction = ForgeDirection.WEST.ordinal();
             }
-            ((TileEntityCobbleGenerator) world.getTileEntity(x, y, z)).setOrientation(direction);
+            ((TileEntityCobbleMachine) world.getTileEntity(x, y, z)).setOrientation(direction);
         }
     }
 
@@ -125,8 +126,8 @@ public class CobbleGenerator extends BlockContainer
         {
             return true;
         }
-        TileEntity tileEntityCobbleGenerator = world.getTileEntity(x, y, z);
-        if (tileEntityCobbleGenerator != null && tileEntityCobbleGenerator instanceof TileEntityCobbleGenerator)
+        TileEntity tileEntityCobbleMachine = world.getTileEntity(x, y, z);
+        if (tileEntityCobbleMachine != null && tileEntityCobbleMachine instanceof TileEntityCobbleMachine)
         {
             player.openGui(CompactIC2Genenators.instance, 1, world, x, y, z);
         }

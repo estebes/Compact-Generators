@@ -5,6 +5,7 @@ import com.estebes.compactic2generators.network.message.MessageTileEntityCobbleG
 import ic2.api.tile.IWrenchable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -35,6 +36,27 @@ public class TileEntityBaseMachine extends TileEntity implements IWrenchable
         {
             this.orientation = (ForgeDirection)orientation;
         }
+    }
+
+
+    // NBT Stuff
+    @Override
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.readFromNBT(nbtTagCompound);
+
+        if (nbtTagCompound.hasKey("tileEntityOrientation"))
+        {
+            this.orientation = ForgeDirection.getOrientation(nbtTagCompound.getByte("tileEntityOrientation"));
+        }
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.writeToNBT(nbtTagCompound);
+
+        nbtTagCompound.setByte("tileEntityOrientation", (byte) this.orientation.ordinal());
     }
 
 

@@ -1,6 +1,6 @@
 package com.estebes.compactic2generators.network;
 
-import com.estebes.compactic2generators.network.message.MessageTileEntityCobbleGenerator;
+import com.estebes.compactic2generators.network.message.MessageTileEntityCobbleMachine;
 import com.estebes.compactic2generators.network.message.MessageTileEntityPCBAssembler;
 import com.estebes.compactic2generators.network.message.MessageTileEntitySimpleGenerator;
 import com.estebes.compactic2generators.reference.Reference;
@@ -15,7 +15,7 @@ public class PacketHandler
     public static void init()
     {
         INSTANCE.registerMessage(MessageTileEntitySimpleGenerator.class, MessageTileEntitySimpleGenerator.class, 0, Side.CLIENT);
-        INSTANCE.registerMessage(MessageTileEntityCobbleGenerator.class, MessageTileEntityCobbleGenerator.class, 1, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileEntityCobbleMachine.class, MessageTileEntityCobbleMachine.class, 1, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileEntityPCBAssembler.class, MessageTileEntityPCBAssembler.class, 2, Side.CLIENT);
     }
 }

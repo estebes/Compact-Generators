@@ -12,7 +12,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class BlockInit
 {
     public static final SimpleGenerator simpleGenerator = new SimpleGenerator();
-    public static final CobbleGenerator cobbleGenerator = new CobbleGenerator();
+    public static final CobbleGenerator cobbleGenerator = new CobbleGenerator(1);
     public static final PCBAssembler pcbAssembler = new PCBAssembler();
     public static final BaseBlock mark3MachineCasing = new BaseBlock(Reference.LOWERCASE_MOD_ID + ":" + "Mark3MachineCasing");
     public static final BaseBlock mark4MachineCasing = new BaseBlock(Reference.LOWERCASE_MOD_ID + ":" + "Mark4MachineCasing");

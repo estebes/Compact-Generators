@@ -13,6 +13,5 @@ public class TileEntityInit
         GameRegistry.registerTileEntity(TileEntitySimpleGenerator.class, "TileEntitySimpleGenerator");
         GameRegistry.registerTileEntity(TileEntityCobbleGenerator.class, "TileEntityCobbleGenerator");
         GameRegistry.registerTileEntity(TileEntityPCBAssembler.class, "TileEntityPCBAssembler");
-        GameRegistry.registerTileEntity(TileEntityBaseBlock.class, "TileEntityBaseBlock");
     }
 }

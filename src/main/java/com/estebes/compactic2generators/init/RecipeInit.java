@@ -19,5 +19,9 @@ public class RecipeInit
                 's', IC2Items.getItem("plateadviron"), 'c', IC2Items.getItem("advancedMachine"));
         GameRegistry.addShapedRecipe(new ItemStack(BlockInit.mark3MachineCasing, 1, 0), "sos", "oco", "sos", 's', IC2Items.getItem("plateadviron"),
                 'o', IC2Items.getItem("denseplateobsidian"), 'c', IC2Items.getItem("advancedMachine"));
+        GameRegistry.addShapedRecipe(new ItemStack(BlockInit.mark4MachineCasing, 1, 0), "sis", "ici", "sis", 's', IC2Items.getItem("denseplateadviron"),
+                'i', IC2Items.getItem("iridiumPlate"), 'c', BlockInit.mark3MachineCasing);
+        GameRegistry.addShapedRecipe(new ItemStack(BlockInit.mark4MachineCasing, 1, 0), "isi", "scs", "isi", 'i', IC2Items.getItem("iridiumPlate"),
+                's', IC2Items.getItem("denseplateadviron"), 'c', BlockInit.mark3MachineCasing);
     }
 }

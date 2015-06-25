@@ -1,8 +1,11 @@
 package com.estebes.compactic2generators.tileentity;
 
+import com.estebes.compactic2generators.network.PacketHandler;
+import com.estebes.compactic2generators.network.message.MessageTileEntityCobbleGenerator;
 import ic2.api.tile.IWrenchable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -10,20 +13,6 @@ public class TileEntityBaseMachine extends TileEntity implements IWrenchable
 {
     // Misc Variables
     private ForgeDirection orientation;
-
-    // Energy Variables
-    private static final int MAX_STORED_ENERGY = 10000;
-    private static final int MAX_VOLTAGE = 32;
-    private boolean ENET_CHECKER;
-    private int MAX_OPERATION_COST;
-    private int STORED_ENERGY;
-    private int CURRENT_OPERATION_COST;
-    private int ENERGY_COST_PER_TICK;
-
-    // Slot Variables
-
-    private ItemStack[] machineInventory;
-
 
     public TileEntityBaseMachine()
     {
@@ -87,4 +76,11 @@ public class TileEntityBaseMachine extends TileEntity implements IWrenchable
         return new ItemStack(getBlockType());
     }
 
+
+    // Network Stuff
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityCobbleGenerator(null));
+    }
 }

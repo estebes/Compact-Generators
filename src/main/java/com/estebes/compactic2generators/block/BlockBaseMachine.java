@@ -1,8 +1,6 @@
 package com.estebes.compactic2generators.block;
 
-import com.estebes.compactic2generators.CompactIC2Genenators;
 import com.estebes.compactic2generators.reference.Reference;
-import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.item.IC2Items;
@@ -13,7 +11,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,25 +23,23 @@ import net.minecraftforge.common.util.ForgeDirection;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class CobbleGenerator extends BlockContainer
+public class BlockBaseMachine extends BlockContainer
 {
-    private boolean isWorking = false;
-
-    public CobbleGenerator()
+    public BlockBaseMachine()
     {
         super(Material.iron);
-        this.setHardness(3.0F);
+        this.setHardness(5.0F);
         this.setStepSound(soundTypeMetal);
         this.setCreativeTab(CreativeTabs.tabRedstone);
-        this.isWorking = true;
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world, int meta)
+    public TileEntity createNewTileEntity(World world, int metaData)
     {
-        return new TileEntityCobbleGenerator();
+        return null;
     }
 
+    // Block render stuff
     @Override
     public boolean renderAsNormalBlock()
     {
@@ -63,6 +58,7 @@ public class CobbleGenerator extends BlockContainer
         return -1;
     }
 
+    // Random stuff to try to have particle effects on break
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister)
     {
@@ -75,12 +71,7 @@ public class CobbleGenerator extends BlockContainer
         return this.blockIcon;
     }
 
-    @Override
-    public int damageDropped(int meta)
-    {
-        return meta;
-    }
-
+    // When the block is placed
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
     {
@@ -90,49 +81,28 @@ public class CobbleGenerator extends BlockContainer
             return;
         }
 
+        int direction = 0;
+        int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        if (facing == 0)
         {
-            int direction = 0;
-            int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-            if (facing == 0)
-            {
-                direction = ForgeDirection.NORTH.ordinal();
-            }
-            else if (facing == 1)
-            {
-                direction = ForgeDirection.EAST.ordinal();
-            }
-            else if (facing == 2)
-            {
-                direction = ForgeDirection.SOUTH.ordinal();
-            }
-            else if (facing == 3)
-            {
-                direction = ForgeDirection.WEST.ordinal();
-            }
-            ((TileEntityCobbleGenerator) world.getTileEntity(x, y, z)).setOrientation(direction);
+            direction = ForgeDirection.NORTH.ordinal();
         }
+        else if (facing == 1)
+        {
+            direction = ForgeDirection.EAST.ordinal();
+        }
+        else if (facing == 2)
+        {
+            direction = ForgeDirection.SOUTH.ordinal();
+        }
+        else if (facing == 3)
+        {
+            direction = ForgeDirection.WEST.ordinal();
+        }
+        //((TileEntity) world.getTileEntity(x, y, z)).setOrientation(direction);
     }
 
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int s, float f1, float f2, float f3)
-    {
-        if (player.isSneaking())
-        {
-            return false;
-        }
-
-        if (world.isRemote)
-        {
-            return true;
-        }
-        TileEntity tileEntityCobbleGenerator = world.getTileEntity(x, y, z);
-        if (tileEntityCobbleGenerator != null && tileEntityCobbleGenerator instanceof TileEntityCobbleGenerator)
-        {
-            player.openGui(CompactIC2Genenators.instance, 1, world, x, y, z);
-        }
-        return true;
-    }
-
+    // Drop machine casing on break
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
     {
@@ -141,8 +111,9 @@ public class CobbleGenerator extends BlockContainer
         return droppedBlock;
     }
 
+    // Drop inventory on break
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+    public void breakBlock(World world, int x, int y, int z, Block block, int metaData)
     {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (!(tileEntity instanceof ISidedInventory))
@@ -150,9 +121,9 @@ public class CobbleGenerator extends BlockContainer
             return;
         }
         ISidedInventory inventory = (ISidedInventory) tileEntity;
-        for (int i = 0; i < inventory.getSizeInventory(); i++)
+        for (int slot = 0; slot < inventory.getSizeInventory(); slot++)
         {
-            ItemStack itemStack = inventory.getStackInSlot(i);
+            ItemStack itemStack = inventory.getStackInSlot(slot);
             if (itemStack != null && itemStack.stackSize > 0)
             {
                 Random rand = new Random();
@@ -172,6 +143,6 @@ public class CobbleGenerator extends BlockContainer
                 itemStack.stackSize = 0;
             }
         }
-        super.breakBlock(world, x, y, z, block, meta);
+        super.breakBlock(world, x, y, z, block, metaData);
     }
 }

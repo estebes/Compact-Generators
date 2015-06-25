@@ -11,13 +11,13 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class ItemRendererCobbleGenerator implements IItemRenderer
+public class ItemRendererPCBAssembler implements IItemRenderer
 {
     private ModelSimpleGenerator modelSimpleGenerator;
 
-    private static final ResourceLocation cobbleGeneratorTexture = new ResourceLocation(Reference.LOWERCASE_MOD_ID + ":" + "textures/models/CobbleGenerator.png");
+    private static final ResourceLocation cobbleGeneratorTexture = new ResourceLocation(Reference.LOWERCASE_MOD_ID + ":" + "textures/models/AssemblyMachineOff.png");
 
-    public ItemRendererCobbleGenerator()
+    public ItemRendererPCBAssembler()
     {
         modelSimpleGenerator = new ModelSimpleGenerator();
     }
@@ -78,8 +78,8 @@ public class ItemRendererCobbleGenerator implements IItemRenderer
 
         GL11.glPushMatrix();
 
-            GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-            modelSimpleGenerator.renderModel(0.0625F);
+        GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+        modelSimpleGenerator.renderModel(0.0625F);
 
         GL11.glPopMatrix();
 

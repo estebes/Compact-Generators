@@ -1,6 +1,7 @@
 package com.estebes.compactic2generators.inventory;
 
 import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
+import com.estebes.compactic2generators.tileentity.TileEntityPCBAssembler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -9,17 +10,17 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 
-public class ContainerCobbleGenerator extends Container
+public class ContainerPCBAssembler extends Container
 {
-    private TileEntityCobbleGenerator tileEntityCobbleGenerator;
+    private TileEntityPCBAssembler tileEntityPCBAssembler;
 
     public int energyPixels;
     public int progressPixels;
 
-    public ContainerCobbleGenerator(InventoryPlayer inventoryPlayer, TileEntityCobbleGenerator tileEntityCobbleGenerator)
+    public ContainerPCBAssembler(InventoryPlayer inventoryPlayer, TileEntityPCBAssembler tileEntityPCBAssembler)
     {
-        this.tileEntityCobbleGenerator = tileEntityCobbleGenerator;
-        this.addSlotToContainer(new SlotCobbleGenerator(tileEntityCobbleGenerator, 0, 116, 35));
+        this.tileEntityPCBAssembler = tileEntityPCBAssembler;
+        this.addSlotToContainer(new SlotCobbleGenerator(tileEntityPCBAssembler, 0, 106, 24));
         bindPlayerInventory(inventoryPlayer);
     }
 
@@ -42,31 +43,31 @@ public class ContainerCobbleGenerator extends Container
     @Override
     public boolean canInteractWith(EntityPlayer player)
     {
-        return this.tileEntityCobbleGenerator.isUseableByPlayer(player);
+        return this.tileEntityPCBAssembler.isUseableByPlayer(player);
     }
 
     @Override
     public void detectAndSendChanges()
     {
         super.detectAndSendChanges();
-        this.energyPixels = tileEntityCobbleGenerator.getScaledEnergy();
-        this.progressPixels = tileEntityCobbleGenerator.getScaledProgress();
+        this.energyPixels = tileEntityPCBAssembler.getScaledEnergy();
+        this.progressPixels = tileEntityPCBAssembler.getScaledProgress();
 
         for (Object crafter : this.crafters)
         {
             ICrafting icrafting = (ICrafting) crafter;
-            if(this.energyPixels != this.tileEntityCobbleGenerator.energyPixels)
+            if(this.energyPixels != this.tileEntityPCBAssembler.energyPixels)
             {
-                icrafting.sendProgressBarUpdate(this, 0, this.tileEntityCobbleGenerator.energyPixels);
+                icrafting.sendProgressBarUpdate(this, 0, this.tileEntityPCBAssembler.energyPixels);
             }
-            if(this.progressPixels != this.tileEntityCobbleGenerator.progressPixels)
+            if(this.progressPixels != this.tileEntityPCBAssembler.progressPixels)
             {
-                icrafting.sendProgressBarUpdate(this, 1, this.tileEntityCobbleGenerator.progressPixels);
+                icrafting.sendProgressBarUpdate(this, 1, this.tileEntityPCBAssembler.progressPixels);
             }
         }
 
-        this.energyPixels = this.tileEntityCobbleGenerator.energyPixels;
-        this.progressPixels = this.tileEntityCobbleGenerator.progressPixels;
+        this.energyPixels = this.tileEntityPCBAssembler.energyPixels;
+        this.progressPixels = this.tileEntityPCBAssembler.progressPixels;
     }
 
     @Override
@@ -75,10 +76,10 @@ public class ContainerCobbleGenerator extends Container
     {
         switch(valueType)
         {
-            case 0: this.tileEntityCobbleGenerator.energyPixels = updatedValue;
-                    break;
-            case 1: this.tileEntityCobbleGenerator.progressPixels = updatedValue;
-                    break;
+            case 0: this.tileEntityPCBAssembler.energyPixels = updatedValue;
+                break;
+            case 1: this.tileEntityPCBAssembler.progressPixels = updatedValue;
+                break;
         }
     }
 

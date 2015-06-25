@@ -14,6 +14,8 @@ public class MessageTileEntityCobbleGenerator implements IMessage, IMessageHandl
     public byte orientation;
     public boolean isWorking;
     public int storedEnergy;
+    public int energyUsed;
+    public byte stackSize, stackMeta;
 
     public MessageTileEntityCobbleGenerator()
     {
@@ -27,6 +29,9 @@ public class MessageTileEntityCobbleGenerator implements IMessage, IMessageHandl
         this.orientation = (byte) tileEntityCobbleGenerator.getOrientation().ordinal();
         this.isWorking = tileEntityCobbleGenerator.getWorkingState();
         this.storedEnergy = tileEntityCobbleGenerator.getEnergyStored();
+        this.energyUsed = tileEntityCobbleGenerator.energyUsed;
+        this.stackSize = tileEntityCobbleGenerator.stackSize;
+        this.stackMeta = tileEntityCobbleGenerator.stackMeta;
     }
 
     @Override
@@ -38,6 +43,10 @@ public class MessageTileEntityCobbleGenerator implements IMessage, IMessageHandl
         this.orientation = buf.readByte();
         this.isWorking = buf.readBoolean();
         this.storedEnergy = buf.readInt();
+        this.energyUsed = buf.readInt();
+        this.stackSize = buf.readByte();
+        this.stackMeta = buf.readByte();
+
     }
 
     @Override
@@ -49,6 +58,9 @@ public class MessageTileEntityCobbleGenerator implements IMessage, IMessageHandl
         buf.writeByte(orientation);
         buf.writeBoolean(isWorking);
         buf.writeInt(storedEnergy);
+        buf.writeInt(energyUsed);
+        buf.writeByte(stackSize);
+        buf.writeByte(stackMeta);
     }
 
     @Override
@@ -60,6 +72,9 @@ public class MessageTileEntityCobbleGenerator implements IMessage, IMessageHandl
             ((TileEntityCobbleGenerator) tileEntity).setOrientation(message.orientation);
             ((TileEntityCobbleGenerator) tileEntity).setWorkingState(message.isWorking);
             ((TileEntityCobbleGenerator) tileEntity).setStoredEnergy(message.storedEnergy);
+            ((TileEntityCobbleGenerator) tileEntity).setEnergyUsed(message.energyUsed);
+            ((TileEntityCobbleGenerator) tileEntity).stackSize = message.stackSize;
+            ((TileEntityCobbleGenerator) tileEntity).stackMeta = message.stackMeta;
         }
         return null;
     }
@@ -67,6 +82,6 @@ public class MessageTileEntityCobbleGenerator implements IMessage, IMessageHandl
     @Override
     public String toString()
     {
-        return String.format("MessageTileEntitySimpleGenerator - x:%s, y:%s, z:%s, orientation:%s, isWorking:%s, storedEnergy:%s", x, y, z, orientation, isWorking, storedEnergy);
+        return String.format("MessageTileEntitySimpleGenerator - x:%s, y:%s, z:%s, orientation:%s, isWorking:%s, storedEnergy:%s, energyUsed:%s, stackSize: %s, stackMeta: %s", x, y, z, orientation, isWorking, storedEnergy, energyUsed, stackSize, stackMeta);
     }
 }

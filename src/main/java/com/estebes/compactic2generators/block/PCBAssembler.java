@@ -2,47 +2,39 @@ package com.estebes.compactic2generators.block;
 
 import com.estebes.compactic2generators.CompactIC2Genenators;
 import com.estebes.compactic2generators.reference.Reference;
-import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
+import com.estebes.compactic2generators.tileentity.TileEntityPCBAssembler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ic2.api.item.IC2Items;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-public class CobbleGenerator extends BlockContainer
+public class PCBAssembler extends BlockContainer
 {
     private boolean isWorking = false;
 
-    public CobbleGenerator()
+    public PCBAssembler()
     {
         super(Material.iron);
         this.setHardness(3.0F);
         this.setStepSound(soundTypeMetal);
         this.setCreativeTab(CreativeTabs.tabRedstone);
-        this.isWorking = true;
+        this.isWorking = false;
     }
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
-        return new TileEntityCobbleGenerator();
+        return new TileEntityPCBAssembler();
     }
 
     @Override
@@ -109,7 +101,7 @@ public class CobbleGenerator extends BlockContainer
             {
                 direction = ForgeDirection.WEST.ordinal();
             }
-            ((TileEntityCobbleGenerator) world.getTileEntity(x, y, z)).setOrientation(direction);
+            ((TileEntityPCBAssembler) world.getTileEntity(x, y, z)).setOrientation(direction);
         }
     }
 
@@ -125,53 +117,11 @@ public class CobbleGenerator extends BlockContainer
         {
             return true;
         }
-        TileEntity tileEntityCobbleGenerator = world.getTileEntity(x, y, z);
-        if (tileEntityCobbleGenerator != null && tileEntityCobbleGenerator instanceof TileEntityCobbleGenerator)
+        TileEntity tileEntityPCBAssembler = world.getTileEntity(x, y, z);
+        if (tileEntityPCBAssembler != null && tileEntityPCBAssembler instanceof TileEntityPCBAssembler)
         {
-            player.openGui(CompactIC2Genenators.instance, 1, world, x, y, z);
+            player.openGui(CompactIC2Genenators.instance, 2, world, x, y, z);
         }
         return true;
-    }
-
-    @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
-    {
-        ArrayList<ItemStack> droppedBlock = new ArrayList<ItemStack>();
-        droppedBlock.add(IC2Items.getItem("machine"));
-        return droppedBlock;
-    }
-
-    @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int meta)
-    {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
-        if (!(tileEntity instanceof ISidedInventory))
-        {
-            return;
-        }
-        ISidedInventory inventory = (ISidedInventory) tileEntity;
-        for (int i = 0; i < inventory.getSizeInventory(); i++)
-        {
-            ItemStack itemStack = inventory.getStackInSlot(i);
-            if (itemStack != null && itemStack.stackSize > 0)
-            {
-                Random rand = new Random();
-                float dX = rand.nextFloat() * 0.8F + 0.1F;
-                float dY = rand.nextFloat() * 0.8F + 0.1F;
-                float dZ = rand.nextFloat() * 0.8F + 0.1F;
-                EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ, itemStack.copy());
-                if (itemStack.hasTagCompound())
-                {
-                    entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());
-                }
-                float factor = 0.05F;
-                entityItem.motionX = rand.nextGaussian() * factor;
-                entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
-                entityItem.motionZ = rand.nextGaussian() * factor;
-                world.spawnEntityInWorld(entityItem);
-                itemStack.stackSize = 0;
-            }
-        }
-        super.breakBlock(world, x, y, z, block, meta);
     }
 }

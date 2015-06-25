@@ -4,19 +4,20 @@ import com.estebes.compactic2generators.model.ModelSimpleGenerator;
 import com.estebes.compactic2generators.reference.Reference;
 import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
 import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
+import com.estebes.compactic2generators.tileentity.TileEntityPCBAssembler;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
-public class RenderCobbleGenerator extends TileEntitySpecialRenderer
+public class RenderPCBAssembler extends TileEntitySpecialRenderer
 {
-    private static final ResourceLocation cobbleGeneratorTexture = new ResourceLocation(Reference.LOWERCASE_MOD_ID + ":" + "textures/models/CobbleGenerator.png");
+    private static final ResourceLocation cobbleGeneratorTexture = new ResourceLocation(Reference.LOWERCASE_MOD_ID + ":" + "textures/models/AssemblyMachineOn.png");
 
     private ModelSimpleGenerator modelSimpleGenerator;
 
-    public RenderCobbleGenerator()
+    public RenderPCBAssembler()
     {
         this.modelSimpleGenerator = new ModelSimpleGenerator();
     }
@@ -24,14 +25,14 @@ public class RenderCobbleGenerator extends TileEntitySpecialRenderer
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
-        if (tileEntity instanceof TileEntityCobbleGenerator)
+        if (tileEntity instanceof TileEntityPCBAssembler)
         {
-            TileEntityCobbleGenerator tileEntityCobbleGenerator = (TileEntityCobbleGenerator) tileEntity;
+            TileEntityPCBAssembler tileEntityPCBAssembler = (TileEntityPCBAssembler) tileEntity;
             ForgeDirection direction = null;
 
-            if (tileEntityCobbleGenerator.getWorldObj() != null)
+            if (tileEntityPCBAssembler.getWorldObj() != null)
             {
-                direction = tileEntityCobbleGenerator.getOrientation();
+                direction = tileEntityPCBAssembler.getOrientation();
             }
 
             this.bindTexture(cobbleGeneratorTexture);

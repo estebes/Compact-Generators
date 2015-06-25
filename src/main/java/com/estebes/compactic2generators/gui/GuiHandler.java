@@ -1,8 +1,10 @@
 package com.estebes.compactic2generators.gui;
 
 import com.estebes.compactic2generators.inventory.ContainerCobbleGenerator;
+import com.estebes.compactic2generators.inventory.ContainerPCBAssembler;
 import com.estebes.compactic2generators.inventory.ContainerSimpleGenerator;
 import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
+import com.estebes.compactic2generators.tileentity.TileEntityPCBAssembler;
 import com.estebes.compactic2generators.tileentity.TileEntitySimpleGenerator;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +27,12 @@ public class GuiHandler implements IGuiHandler
             return new ContainerCobbleGenerator(player.inventory, tileEntityCobbleGenerator);
         }
 
+        if(ID == 2)
+        {
+            TileEntityPCBAssembler tileEntityPCBAssembler = (TileEntityPCBAssembler) world.getTileEntity(x, y ,z);
+            return new ContainerPCBAssembler(player.inventory, tileEntityPCBAssembler);
+        }
+
         return null;
     }
 
@@ -41,6 +49,12 @@ public class GuiHandler implements IGuiHandler
         {
             TileEntityCobbleGenerator tileEntityCobbleGenerator = (TileEntityCobbleGenerator) world.getTileEntity(x, y ,z);
             return new GuiCobbleGenerator(player.inventory, tileEntityCobbleGenerator);
+        }
+
+        if(ID == 2)
+        {
+            TileEntityPCBAssembler tileEntityPCBAssembler = (TileEntityPCBAssembler) world.getTileEntity(x, y ,z);
+            return new GuiPCBAssembler(player.inventory, tileEntityPCBAssembler);
         }
 
         return null;

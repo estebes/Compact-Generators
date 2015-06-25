@@ -2,6 +2,7 @@ package com.estebes.compactic2generators;
 
 import com.estebes.compactic2generators.gui.GuiHandler;
 import com.estebes.compactic2generators.init.BlockInit;
+import com.estebes.compactic2generators.init.ItemInit;
 import com.estebes.compactic2generators.init.RecipeInit;
 import com.estebes.compactic2generators.init.TileEntityInit;
 import com.estebes.compactic2generators.network.PacketHandler;
@@ -15,6 +16,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.item.Item;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 public class CompactIC2Genenators
@@ -31,6 +33,8 @@ public class CompactIC2Genenators
         PacketHandler.init();
 
         BlockInit.init();
+
+        ItemInit.init();
     }
 
     @EventHandler

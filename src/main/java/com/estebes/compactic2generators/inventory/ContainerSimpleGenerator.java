@@ -2,21 +2,21 @@ package com.estebes.compactic2generators.inventory;
 
 import com.estebes.compactic2generators.tileentity.TileEntitySimpleGenerator;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
 public class ContainerSimpleGenerator extends Container
 {
     private TileEntitySimpleGenerator tileEntitySimpleGenerator;
 
-    public ContainerSimpleGenerator(InventoryPlayer inventoryPlayer, TileEntitySimpleGenerator tileEntitySimpleGenerator)
+    public ContainerSimpleGenerator(IInventory inventoryPlayer, TileEntitySimpleGenerator tileEntitySimpleGenerator)
     {
         this.tileEntitySimpleGenerator = tileEntitySimpleGenerator;
         bindPlayerInventory(inventoryPlayer);
     }
 
-    private void bindPlayerInventory(InventoryPlayer inventoryPlayer)
+    private void bindPlayerInventory(IInventory inventoryPlayer)
     {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
@@ -33,6 +33,6 @@ public class ContainerSimpleGenerator extends Container
     @Override
     public boolean canInteractWith(EntityPlayer player)
     {
-        return this.tileEntitySimpleGenerator.isUseableByPlayer(player);
+        return true;
     }
 }

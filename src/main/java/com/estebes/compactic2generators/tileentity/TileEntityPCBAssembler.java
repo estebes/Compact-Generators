@@ -1,11 +1,12 @@
 package com.estebes.compactic2generators.tileentity;
 
-import com.estebes.compactic2generators.init.BlockInit;
 import com.estebes.compactic2generators.network.PacketHandler;
 import com.estebes.compactic2generators.network.message.MessageTileEntityCobbleGenerator;
+import com.estebes.compactic2generators.network.message.MessageTileEntityPCBAssembler;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergySink;
+import ic2.api.item.IC2Items;
 import ic2.api.tile.IWrenchable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -18,13 +19,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityCobbleGenerator extends TileEntity implements ISidedInventory, IWrenchable, IEnergySink
+public class TileEntityPCBAssembler extends TileEntity implements ISidedInventory, IWrenchable, IEnergySink
 {
     // Energy parameters
-    private static final int MAX_STORED_ENERGY = 1000000;
-    private static final int MAX_VOLTAGE = 2048;
+    private static final int MAX_STORED_ENERGY = 30000;
+    private static final int MAX_VOLTAGE = 128;
     private int storedEnergy = 0;
-    private int runningEUPerTick = 2048;
+    private int runningEUPerTick = 2;
     private final int MAX_PROGRESS = 1000;
     public int energyUsed;
 
@@ -39,7 +40,7 @@ public class TileEntityCobbleGenerator extends TileEntity implements ISidedInven
 
     private ItemStack[] slots = new ItemStack[1];
 
-    public TileEntityCobbleGenerator()
+    public TileEntityPCBAssembler()
     {
         orientation = ForgeDirection.SOUTH;
         this.isWorking = false;
@@ -141,12 +142,12 @@ public class TileEntityCobbleGenerator extends TileEntity implements ISidedInven
     @Override
     public Packet getDescriptionPacket()
     {
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityCobbleGenerator(this));
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityPCBAssembler(this));
     }
 
     @Override
     public int getSizeInventory() {
-        return 1;
+        return 0;
     }
 
     @Override
@@ -260,13 +261,13 @@ public class TileEntityCobbleGenerator extends TileEntity implements ISidedInven
     @Override
     public float getWrenchDropRate()
     {
-        return 0.9F;
+        return 1.0F;
     }
 
     @Override
     public ItemStack getWrenchDrop(EntityPlayer entityPlayer)
     {
-        return new ItemStack(this.getBlockType());
+        return null;
     }
 
     @Override
@@ -278,7 +279,7 @@ public class TileEntityCobbleGenerator extends TileEntity implements ISidedInven
     @Override
     public int getSinkTier()
     {
-        return 4;
+        return 2;
     }
 
     @Override
@@ -352,10 +353,23 @@ public class TileEntityCobbleGenerator extends TileEntity implements ISidedInven
             return;
         }
 
-        //this.energyUsed += 3;
-        this.storedEnergy -= this.runningEUPerTick;
+        if(this.slots[0] != null)
+        {
+            if(this.slots[0].stackSize >= 64)
+            {
+                return;
+            }
+        }
 
-        addItemStacktoOutput();
+        this.energyUsed += 32;
+        this.storedEnergy -= 32;
+
+        if(this.energyUsed >= 1000)
+        {
+            this.energyUsed = 0;
+            addItemStacktoOutput();;
+        }
+
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         markDirty();
     }
@@ -367,7 +381,7 @@ public class TileEntityCobbleGenerator extends TileEntity implements ISidedInven
 
     public int getScaledProgress()
     {
-        return energyUsed * 22 / 1000;
+        return energyUsed * 19 / 1000;
     }
 
     @Override
@@ -390,7 +404,7 @@ public class TileEntityCobbleGenerator extends TileEntity implements ISidedInven
 
     public void addItemStacktoOutput()
     {
-        ItemStack cobbleStack =  new ItemStack(Blocks.cobblestone);
+        ItemStack cobbleStack =  IC2Items.getItem("electronicCircuit");
         int maxStackSize = Math.min(getInventoryStackLimit(), cobbleStack.getMaxStackSize());
 
         if(this.slots[0] == null)
@@ -401,7 +415,7 @@ public class TileEntityCobbleGenerator extends TileEntity implements ISidedInven
         {
             if(slots[0].stackSize < maxStackSize)
             {
-                this.slots[0].stackSize += 64;
+                this.slots[0].stackSize += cobbleStack.stackSize;
             }
         }
         else
@@ -409,5 +423,4 @@ public class TileEntityCobbleGenerator extends TileEntity implements ISidedInven
             return;
         }
     }
-
 }

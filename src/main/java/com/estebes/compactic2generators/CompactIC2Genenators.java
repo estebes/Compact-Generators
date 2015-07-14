@@ -44,14 +44,13 @@ public class CompactIC2Genenators
 
         TileEntityInit.init();
 
-        RecipeInit.init();
-
         proxy.registerRenderInformation();
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent postinit)
     {
+        RecipeInit.init();
     }
 
 }

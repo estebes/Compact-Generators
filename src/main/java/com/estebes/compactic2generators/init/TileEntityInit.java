@@ -1,9 +1,6 @@
 package com.estebes.compactic2generators.init;
 
-import com.estebes.compactic2generators.tileentity.TileEntityBaseBlock;
-import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
-import com.estebes.compactic2generators.tileentity.TileEntityPCBAssembler;
-import com.estebes.compactic2generators.tileentity.TileEntitySimpleGenerator;
+import com.estebes.compactic2generators.tileentity.*;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TileEntityInit
@@ -13,5 +10,10 @@ public class TileEntityInit
         GameRegistry.registerTileEntity(TileEntitySimpleGenerator.class, "TileEntitySimpleGenerator");
         GameRegistry.registerTileEntity(TileEntityCobbleGenerator.class, "TileEntityCobbleGenerator");
         GameRegistry.registerTileEntity(TileEntityPCBAssembler.class, "TileEntityPCBAssembler");
+        for(int i = 1; i < 5; i++)
+        {
+            GameRegistry.registerTileEntity(TileEntityCobbleMachine.class, "TileEntityCobbleMachineMark" + i);
+        }
+        GameRegistry.registerTileEntity(TileEntityTreeHarvester.class, "TileEntityTreeHarvester");
     }
 }

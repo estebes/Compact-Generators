@@ -19,7 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityPCBAssembler extends TileEntity implements ISidedInventory, IWrenchable, IEnergySink
+public class TileEntityPCBAssembler extends TileEntityBaseMachine implements ISidedInventory, IEnergySink
 {
     // Energy parameters
     private static final int MAX_STORED_ENERGY = 30000;
@@ -29,7 +29,6 @@ public class TileEntityPCBAssembler extends TileEntity implements ISidedInventor
     private final int MAX_PROGRESS = 1000;
     public int energyUsed;
 
-    private ForgeDirection orientation;
     private Boolean isWorking;
     private Boolean enetPresent = false;
 
@@ -42,25 +41,10 @@ public class TileEntityPCBAssembler extends TileEntity implements ISidedInventor
 
     public TileEntityPCBAssembler()
     {
-        orientation = ForgeDirection.SOUTH;
         this.isWorking = false;
         this.energyUsed = 0;
     }
 
-    public ForgeDirection getOrientation()
-    {
-        return this.orientation;
-    }
-
-    public void setOrientation(ForgeDirection orientation)
-    {
-        this.orientation = orientation;
-    }
-
-    public void setOrientation(int orientation)
-    {
-        this.orientation = ForgeDirection.getOrientation(orientation);
-    }
 
     public boolean getWorkingState()
     {
@@ -96,11 +80,6 @@ public class TileEntityPCBAssembler extends TileEntity implements ISidedInventor
                 this.slots[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
             }
         }
-
-        if (nbtTagCompound.hasKey("teDirection"))
-        {
-            this.orientation = ForgeDirection.getOrientation(nbtTagCompound.getByte("teDirection"));
-        }
         if (nbtTagCompound.hasKey("teWorking"))
         {
             this.isWorking = nbtTagCompound.getBoolean("teWorking");
@@ -133,7 +112,6 @@ public class TileEntityPCBAssembler extends TileEntity implements ISidedInventor
         }
 
         nbtTagCompound.setTag("teNBT", tagList);
-        nbtTagCompound.setByte("teDirection", (byte) this.orientation.ordinal());
         nbtTagCompound.setBoolean("teWorking", this.isWorking);
         nbtTagCompound.setInteger("teEnergyStored", this.storedEnergy);
         nbtTagCompound.setInteger("teEnergyUsed", this.energyUsed);
@@ -231,43 +209,6 @@ public class TileEntityPCBAssembler extends TileEntity implements ISidedInventor
     @Override
     public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
         return false;
-    }
-
-    @Override
-    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side)
-    {
-        return ((side > 1 && side != this.orientation.ordinal()) ? true : false);
-    }
-
-    @Override
-    public short getFacing()
-    {
-        return (short)this.orientation.ordinal();
-    }
-
-    @Override
-    public void setFacing(short facing)
-    {
-        this.setOrientation((int) facing);
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public boolean wrenchCanRemove(EntityPlayer entityPlayer)
-    {
-        return (this.orientation.ordinal() > 1 ? true : false);
-    }
-
-    @Override
-    public float getWrenchDropRate()
-    {
-        return 1.0F;
-    }
-
-    @Override
-    public ItemStack getWrenchDrop(EntityPlayer entityPlayer)
-    {
-        return null;
     }
 
     @Override

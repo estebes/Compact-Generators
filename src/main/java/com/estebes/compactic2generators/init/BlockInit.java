@@ -1,12 +1,9 @@
 package com.estebes.compactic2generators.init;
 
-import com.estebes.compactic2generators.block.BaseBlock;
-import com.estebes.compactic2generators.block.CobbleGenerator;
-import com.estebes.compactic2generators.block.PCBAssembler;
-import com.estebes.compactic2generators.block.SimpleGenerator;
+import com.estebes.compactic2generators.block.*;
+import com.estebes.compactic2generators.item.CobbleItemMachine;
 import com.estebes.compactic2generators.reference.Reference;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class BlockInit
@@ -16,6 +13,8 @@ public class BlockInit
     public static final PCBAssembler pcbAssembler = new PCBAssembler();
     public static final BaseBlock mark3MachineCasing = new BaseBlock(Reference.LOWERCASE_MOD_ID + ":" + "Mark3MachineCasing");
     public static final BaseBlock mark4MachineCasing = new BaseBlock(Reference.LOWERCASE_MOD_ID + ":" + "Mark4MachineCasing");
+    public static final BlockBaseMachine cobbleMachine = new BlockBaseMachine();
+    public static final BlockTreeHarvester treeHarvester = new BlockTreeHarvester();
 
     public static void init()
     {
@@ -32,5 +31,8 @@ public class BlockInit
         GameRegistry.registerBlock(mark3MachineCasing, "Mark 3 Machine Casing");
         mark4MachineCasing.setBlockName("Mark 4 Machine Casing");
         GameRegistry.registerBlock(mark4MachineCasing, "Mark 4 Machine Casing");
+        //GameRegistry.registerBlock(cobbleMachine, CobbleItemMachine.class, "CobbleMachineBlock");
+        treeHarvester.setBlockName("ResinFarm");
+        GameRegistry.registerBlock(treeHarvester, "Tree Harvester");
     }
 }

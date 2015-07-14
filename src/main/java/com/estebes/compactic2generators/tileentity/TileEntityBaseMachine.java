@@ -100,9 +100,9 @@ public class TileEntityBaseMachine extends TileEntity implements IWrenchable
 
 
     // Network Stuff
-    @Override
+    /*@Override
     public Packet getDescriptionPacket()
     {
         return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityCobbleGenerator(null));
-    }
+    }*/
 }

@@ -1,7 +1,8 @@
 package com.estebes.compactic2generators.tileentity;
 
+import com.estebes.compactic2generators.data.CobbleMachineTier;
 import com.estebes.compactic2generators.network.PacketHandler;
-import com.estebes.compactic2generators.network.message.MessageTileEntityCobbleGenerator;
+import com.estebes.compactic2generators.network.message.MessageTileEntityCobbleMachine;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergySink;
@@ -21,7 +22,7 @@ public class TileEntityCobbleMachine extends TileEntityBaseMachine implements IS
     private int tickCounter;
 
     // Energy Variables
-    private final int MAX_STORED_ENERGY;
+    public final int MAX_STORED_ENERGY;
     private final int MAX_VOLTAGE;
     private final int ENERGY_COST_PER_TICK;
     private int STORED_ENERGY;
@@ -30,8 +31,14 @@ public class TileEntityCobbleMachine extends TileEntityBaseMachine implements IS
     // Slot Variables
     private ItemStack[] machineInventory;
 
+    public TileEntityCobbleMachine()
+    {
+        this(1);
+    }
+
     public TileEntityCobbleMachine(int machineTier)
     {
+        super();
         this.machineInventory = new ItemStack[1];
         this.machineTier = machineTier;
         this.MAX_STORED_ENERGY = 4000 * (int) Math.pow(4, machineTier - 1);
@@ -40,6 +47,7 @@ public class TileEntityCobbleMachine extends TileEntityBaseMachine implements IS
         this.STORED_ENERGY = 0;
         this.tickCounter = 0;
     }
+
 
     // IEnergy Sink Stuff
     @Override
@@ -125,7 +133,7 @@ public class TileEntityCobbleMachine extends TileEntityBaseMachine implements IS
     @Override
     public String getInventoryName()
     {
-        return null;
+        return "Cobble Generator Mark " + this.machineTier;
     }
 
     @Override
@@ -256,6 +264,6 @@ public class TileEntityCobbleMachine extends TileEntityBaseMachine implements IS
     @Override
     public Packet getDescriptionPacket()
     {
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityCobbleGenerator(null));
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityCobbleMachine(this));
     }
 }

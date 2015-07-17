@@ -1,9 +1,11 @@
 package com.estebes.compactic2generators.tileentity;
 
+import com.estebes.compactic2generators.network.PacketHandler;
+import com.estebes.compactic2generators.network.message.MessageTileEntityInventoryMachine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.Packet;
 
 public class TileEntityInventoryMachine extends TileEntityBaseMachine implements ISidedInventory
 {
@@ -12,7 +14,7 @@ public class TileEntityInventoryMachine extends TileEntityBaseMachine implements
 
 
     // Constructor
-    public TileEntityInventoryMachine(int maxStoredEnergy, int sinkTier, int energyCostTick, int inventorySize)
+    public TileEntityInventoryMachine(int inventorySize)
     {
         super();
         this.machineInventory = new ItemStack[inventorySize];
@@ -20,7 +22,7 @@ public class TileEntityInventoryMachine extends TileEntityBaseMachine implements
 
 
     // NBT Stuff
-    @Override
+    /*@Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
         super.readFromNBT(nbtTagCompound);
@@ -37,17 +39,10 @@ public class TileEntityInventoryMachine extends TileEntityBaseMachine implements
         super.writeToNBT(nbtTagCompound);
 
         //nbtTagCompound.setByte("tileEntityOrientation", (byte) this.orientation.ordinal());
-    }
+    }*/
 
 
     // ENET Stuff
-    @Override
-    public void updateEntity()
-    {
-        super.updateEntity();
-
-        markDirty();
-    }
 
 
     // Inventory Stuff
@@ -166,5 +161,13 @@ public class TileEntityInventoryMachine extends TileEntityBaseMachine implements
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
         return false;
+    }
+
+
+    // Network Stuff
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityInventoryMachine(this));
     }
 }

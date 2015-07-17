@@ -1,6 +1,7 @@
 package com.estebes.compactic2generators.init;
 
 import com.estebes.compactic2generators.block.*;
+import com.estebes.compactic2generators.block.machine.ElectricItemBuffer;
 import com.estebes.compactic2generators.item.CobbleItemMachine;
 import com.estebes.compactic2generators.reference.Reference;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -15,7 +16,8 @@ public class BlockInit
     public static final BaseBlock mark4MachineCasing = new BaseBlock(Reference.LOWERCASE_MOD_ID + ":" + "Mark4MachineCasing");
     public static final BlockBaseMachine cobbleMachine = new BlockBaseMachine();
     public static final BlockTreeHarvester treeHarvester = new BlockTreeHarvester();
-    public static final EnergyItemBuffer energyItemBuffer = new EnergyItemBuffer();
+    //public static final EnergyItemBuffer energyItemBuffer = new EnergyItemBuffer();
+    public static final ElectricItemBuffer electricItemBuffer = new ElectricItemBuffer();
 
     public static void init()
     {
@@ -34,8 +36,9 @@ public class BlockInit
         GameRegistry.registerBlock(mark4MachineCasing, "Mark 4 Machine Casing");
         //GameRegistry.registerBlock(cobbleMachine, CobbleItemMachine.class, "CobbleMachineBlock");
         treeHarvester.setBlockName("ResinFarm");
-        GameRegistry.registerBlock(treeHarvester, "Tree Harvester");
+        GameRegistry.registerBlock(treeHarvester, "TreeHarvester");
 
-        GameRegistry.registerBlock(energyItemBuffer, "Roflcopter");
+        //GameRegistry.registerBlock(energyItemBuffer, "EnergyItemBuffer");
+        GameRegistry.registerBlock(electricItemBuffer, "ElectricItemBuffer");
     }
 }

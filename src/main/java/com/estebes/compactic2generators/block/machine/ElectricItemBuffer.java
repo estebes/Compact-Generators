@@ -1,4 +1,4 @@
-package com.estebes.compactic2generators.block;
+package com.estebes.compactic2generators.block.machine;
 
 import com.estebes.compactic2generators.CompactIC2Genenators;
 import com.estebes.compactic2generators.reference.Reference;
@@ -15,14 +15,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class EnergyItemBuffer extends BlockContainer
+/**
+ * Created by estebes on 17/07/2015.
+ */
+public class ElectricItemBuffer extends BlockContainer
 {
-    public EnergyItemBuffer()
+    public ElectricItemBuffer()
     {
         super(Material.iron);
         this.setHardness(5.0F);
         this.setStepSound(soundTypeMetal);
-        this.setBlockName("EnergyItemBuffer");
+        this.setBlockName("ElectricItemBuffer");
         this.setCreativeTab(CreativeTabs.tabRedstone);
     }
 
@@ -60,9 +63,9 @@ public class EnergyItemBuffer extends BlockContainer
         }
 
         TileEntity tileEntity = world.getTileEntity(x, y, z);
-        if (tileEntity != null && tileEntity instanceof TileEntityEnergyItemBuffer)
+        if (tileEntity != null && tileEntity instanceof TileEntityElectricItemBuffer)
         {
-            player.openGui(CompactIC2Genenators.instance, 4, world, x, y, z);
+            player.openGui(CompactIC2Genenators.instance, 5, world, x, y, z);
         }
         return true;
     }

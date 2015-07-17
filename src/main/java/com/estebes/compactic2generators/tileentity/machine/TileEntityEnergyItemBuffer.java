@@ -1,14 +1,20 @@
 package com.estebes.compactic2generators.tileentity.machine;
 
+import com.estebes.compactic2generators.network.PacketHandler;
+import com.estebes.compactic2generators.network.message.MessageTileEntityEnergyItemBuffer;
 import com.estebes.compactic2generators.tileentity.TileEntityEnergyMachine;
+import ic2.api.energy.event.EnergyTileLoadEvent;
+import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergySource;
+import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityEnergyItemBuffer extends TileEntityEnergyMachine implements IEnergySource
+public class TileEntityEnergyItemBuffer extends TileEntityEnergyMachine
 {
     // Variables
-
+    private boolean enetChecker;
 
 
     // Constructor
@@ -17,39 +23,4 @@ public class TileEntityEnergyItemBuffer extends TileEntityEnergyMachine implemen
         super(maxStoredEnergy, sinkTier, energyCostTick, inventorySize);
     }
 
-
-    // Stuff
-    @Override
-    public void updateEntity()
-    {
-        super.updateEntity();
-
-        markDirty();
-    }
-
-
-    // IEnergySource Stuff
-    @Override
-    public double getOfferedEnergy()
-    {
-        return Math.min(getStoredEnergy(), getMaxVoltage());
-    }
-
-    @Override
-    public void drawEnergy(double amount)
-    {
-        setStoredEnergy((int)(getStoredEnergy() - amount));
-    }
-
-    @Override
-    public int getSourceTier()
-    {
-        return 4;
-    }
-
-    @Override
-    public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction)
-    {
-        return true;
-    }
 }

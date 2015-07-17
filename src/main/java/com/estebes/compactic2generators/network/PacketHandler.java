@@ -17,6 +17,9 @@ public class PacketHandler
         INSTANCE.registerMessage(MessageTileEntityPCBAssembler.class, MessageTileEntityPCBAssembler.class, 2, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileEntityTreeHarvester.class, MessageTileEntityTreeHarvester.class, 3, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileEntityBaseMachine.class, MessageTileEntityBaseMachine.class, 4, Side.CLIENT);
-        INSTANCE.registerMessage(MessageTileEntityEnergyMachine.class, MessageTileEntityEnergyMachine.class, 5, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileEntityInventoryMachine.class, MessageTileEntityInventoryMachine.class, 5, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileEntityEnergyMachine.class, MessageTileEntityEnergyMachine.class, 6, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileEntityEnergyItemBuffer.class, MessageTileEntityEnergyItemBuffer.class, 7, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileEntityElectricItemBuffer.class, MessageTileEntityElectricItemBuffer.class, 8, Side.CLIENT);
     }
 }

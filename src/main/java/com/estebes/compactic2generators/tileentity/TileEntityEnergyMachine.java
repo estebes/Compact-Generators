@@ -25,7 +25,7 @@ public class TileEntityEnergyMachine extends TileEntityInventoryMachine implemen
     // Constructor
     public TileEntityEnergyMachine(int maxStoredEnergy, int sinkTier, int energyCostTick, int inventorySize)
     {
-        super(maxStoredEnergy, sinkTier, energyCostTick, inventorySize);
+        super(inventorySize);
         this.maxStoredEnergy = maxStoredEnergy;
         this.sinkTier = sinkTier;
         this.energyCostTick = energyCostTick;
@@ -93,13 +93,7 @@ public class TileEntityEnergyMachine extends TileEntityInventoryMachine implemen
             enetChecker = true;
         }
 
-        if(storedEnergy < energyCostTick)
-        {
-            return;
-        }
-
-        storedEnergy -= energyCostTick;
-
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         markDirty();
     }
 
@@ -160,6 +154,13 @@ public class TileEntityEnergyMachine extends TileEntityInventoryMachine implemen
     public int getEnergyCostTick()
     {
         return energyCostTick;
+    }
+
+
+    // Energy Level
+    public int getScaledEnergy()
+    {
+        return storedEnergy * 13 / maxStoredEnergy;
     }
 
 

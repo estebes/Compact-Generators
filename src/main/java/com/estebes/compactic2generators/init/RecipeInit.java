@@ -32,5 +32,8 @@ public class RecipeInit
 
         Recipes.advRecipes.addRecipe(new ItemStack(BlockInit.treeHarvester, 1, 0), " t ", "ece", "   ", 'c', IC2Items.getItem("machine"),
                 'e', IC2Items.getItem("electronicCircuit"), 't', IC2Items.getItem("electricTreetap"));
+
+        Recipes.advRecipes.addShapelessRecipe(new ItemStack(BlockInit.electricItemBuffer, 1, 0), IC2Items.getItem("glassFiberCableItem"),
+                IC2Items.getItem("itembuffer"));
     }
 }

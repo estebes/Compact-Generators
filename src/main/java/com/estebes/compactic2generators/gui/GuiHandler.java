@@ -1,10 +1,9 @@
 package com.estebes.compactic2generators.gui;
 
-import com.estebes.compactic2generators.inventory.ContainerCobbleGenerator;
-import com.estebes.compactic2generators.inventory.ContainerPCBAssembler;
-import com.estebes.compactic2generators.inventory.ContainerSimpleGenerator;
-import com.estebes.compactic2generators.inventory.ContainerTreeHarvester;
+import com.estebes.compactic2generators.inventory.*;
 import com.estebes.compactic2generators.tileentity.*;
+import com.estebes.compactic2generators.tileentity.machine.TileEntityElectricItemBuffer;
+import com.estebes.compactic2generators.tileentity.machine.TileEntityEnergyItemBuffer;
 import com.estebes.compactic2generators.tileentity.machine.TileEntityPCBAssembler;
 import com.estebes.compactic2generators.tileentity.machine.TileEntityTreeHarvester;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -40,6 +39,18 @@ public class GuiHandler implements IGuiHandler
             return new ContainerTreeHarvester(player.inventory, tileEntityTreeHarvester);
         }
 
+        if(ID == 4)
+        {
+            //TileEntityEnergyItemBuffer tileEntityEnergyItemBuffer = (TileEntityEnergyItemBuffer) world.getTileEntity(x, y ,z);
+            //return new ContainerEnergyItemBuffer(player.inventory, tileEntityEnergyItemBuffer);
+        }
+
+        if(ID == 5)
+        {
+            TileEntityElectricItemBuffer tileEntityElectricItemBuffer = (TileEntityElectricItemBuffer) world.getTileEntity(x, y ,z);
+            return new ContainerElectricItemBuffer(player.inventory, tileEntityElectricItemBuffer);
+        }
+
         return null;
     }
 
@@ -68,6 +79,18 @@ public class GuiHandler implements IGuiHandler
         {
             TileEntityTreeHarvester tileEntityTreeHarvester = (TileEntityTreeHarvester) world.getTileEntity(x, y ,z);
             return new GuiTreeHarvester(player.inventory, tileEntityTreeHarvester);
+        }
+
+        if(ID == 4)
+        {
+            //TileEntityEnergyItemBuffer tileEntityEnergyItemBuffer = (TileEntityEnergyItemBuffer) world.getTileEntity(x, y ,z);
+            //return new GuiElectricItemBuffer(player.inventory, tileEntityEnergyItemBuffer);
+        }
+
+        if(ID == 5)
+        {
+            TileEntityElectricItemBuffer tileEntityElectricItemBuffer = (TileEntityElectricItemBuffer) world.getTileEntity(x, y ,z);
+            return new GuiElectricItemBuffer(player.inventory, tileEntityElectricItemBuffer);
         }
 
         return null;

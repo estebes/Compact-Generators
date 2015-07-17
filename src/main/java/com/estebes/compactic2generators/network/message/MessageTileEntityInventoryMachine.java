@@ -1,6 +1,6 @@
 package com.estebes.compactic2generators.network.message;
 
-import com.estebes.compactic2generators.tileentity.TileEntityEnergyMachine;
+import com.estebes.compactic2generators.tileentity.TileEntityInventoryMachine;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -8,22 +8,21 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 
-public class MessageTileEntityEnergyMachine implements IMessage, IMessageHandler<MessageTileEntityEnergyMachine, IMessage>
+public class MessageTileEntityInventoryMachine implements IMessage, IMessageHandler<MessageTileEntityInventoryMachine, IMessage>
 {
     // Variables
     private int x, y, z;
-    private int storedEnergy;
-    private boolean enetChecker;
+    private byte orientation;
 
 
     // Constructor
-    public MessageTileEntityEnergyMachine()
+    public MessageTileEntityInventoryMachine()
     {
     }
 
-    public MessageTileEntityEnergyMachine(TileEntityEnergyMachine tileEntityEnergyMachine)
+    public MessageTileEntityInventoryMachine(TileEntityInventoryMachine tileEntityInventoryMachine)
     {
-        this.storedEnergy = tileEntityEnergyMachine.getStoredEnergy();
+        this.orientation = (byte) tileEntityInventoryMachine.getOrientation().ordinal();
     }
 
 
@@ -34,8 +33,7 @@ public class MessageTileEntityEnergyMachine implements IMessage, IMessageHandler
         x = buf.readInt();
         y = buf.readInt();
         z = buf.readInt();
-        storedEnergy = buf.readInt();
-        enetChecker = buf.readBoolean();
+        orientation = buf.readByte();
     }
 
     @Override
@@ -44,17 +42,16 @@ public class MessageTileEntityEnergyMachine implements IMessage, IMessageHandler
         buf.writeInt(x);
         buf.writeInt(y);
         buf.writeInt(z);
-        buf.writeInt(storedEnergy);
-        buf.writeBoolean(enetChecker);
+        buf.writeByte(orientation);
     }
 
     @Override
-    public IMessage onMessage(MessageTileEntityEnergyMachine message, MessageContext ctx)
+    public IMessage onMessage(MessageTileEntityInventoryMachine message, MessageContext ctx)
     {
         TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
-        if (tileEntity instanceof TileEntityEnergyMachine)
+        if (tileEntity instanceof TileEntityInventoryMachine)
         {
-            ((TileEntityEnergyMachine) tileEntity).setStoredEnergy(message.storedEnergy);
+            ((TileEntityInventoryMachine) tileEntity).setOrientation(message.orientation);
         }
         return null;
     }
@@ -62,6 +59,6 @@ public class MessageTileEntityEnergyMachine implements IMessage, IMessageHandler
     @Override
     public String toString()
     {
-        return String.format("MessageTileEntityEnergyMachine - x:%s, y:%s, z:%s, storedEnergy:%s", x, y, z, storedEnergy);
+        return String.format("MessageTileEntityInventoryMachine - x:%s, y:%s, z:%s, orientation:%s", x, y, z, orientation);
     }
 }

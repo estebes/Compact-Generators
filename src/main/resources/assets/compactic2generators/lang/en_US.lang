@@ -1,3 +1,4 @@
 # Blocks
 tile.ResinFarm.name=Resin Harvester
 tile.EnergyItemBuffer.name=Item and Energy Buffer
+tile.ElectricItemBuffer.name=Electric Item Buffer

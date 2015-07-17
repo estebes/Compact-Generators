@@ -5,6 +5,8 @@ import com.estebes.compactic2generators.inventory.ContainerPCBAssembler;
 import com.estebes.compactic2generators.inventory.ContainerSimpleGenerator;
 import com.estebes.compactic2generators.inventory.ContainerTreeHarvester;
 import com.estebes.compactic2generators.tileentity.*;
+import com.estebes.compactic2generators.tileentity.machine.TileEntityPCBAssembler;
+import com.estebes.compactic2generators.tileentity.machine.TileEntityTreeHarvester;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

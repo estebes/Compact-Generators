@@ -17,9 +17,9 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.10-0.0.1"
+version = "1.7.10-0.1"
 group= "com.estebes.compactic2generators" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "compact_ic2_generators"
+archivesBaseName = "justabunchofic2machines"
 
 minecraft {
     version = "1.7.10-10.13.3.1388-1.7.10"

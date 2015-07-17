@@ -1,7 +1,7 @@
 package com.estebes.compactic2generators.tileentity;
 
 import com.estebes.compactic2generators.network.PacketHandler;
-import com.estebes.compactic2generators.network.message.MessageTileEntityCobbleGenerator;
+import com.estebes.compactic2generators.network.message.MessageTileEntityBaseMachine;
 import ic2.api.tile.IWrenchable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,24 +20,6 @@ public class TileEntityBaseMachine extends TileEntity implements IWrenchable
         this.orientation = ForgeDirection.SOUTH;
     }
 
-    // Tile Entity orientation stuff
-    public ForgeDirection getOrientation()
-    {
-        return this.orientation;
-    }
-
-    public void setOrientation(Object orientation)
-    {
-        if(orientation instanceof Integer)
-        {
-            this.orientation = ForgeDirection.getOrientation((Integer)orientation);
-        }
-        if(orientation instanceof ForgeDirection)
-        {
-            this.orientation = (ForgeDirection)orientation;
-        }
-    }
-
 
     // NBT Stuff
     @Override
@@ -47,7 +29,7 @@ public class TileEntityBaseMachine extends TileEntity implements IWrenchable
 
         if (nbtTagCompound.hasKey("tileEntityOrientation"))
         {
-            this.orientation = ForgeDirection.getOrientation(nbtTagCompound.getByte("tileEntityOrientation"));
+            orientation = ForgeDirection.getOrientation(nbtTagCompound.getByte("tileEntityOrientation"));
         }
     }
 
@@ -56,7 +38,7 @@ public class TileEntityBaseMachine extends TileEntity implements IWrenchable
     {
         super.writeToNBT(nbtTagCompound);
 
-        nbtTagCompound.setByte("tileEntityOrientation", (byte) this.orientation.ordinal());
+        nbtTagCompound.setByte("tileEntityOrientation", (byte) orientation.ordinal());
     }
 
 
@@ -64,7 +46,7 @@ public class TileEntityBaseMachine extends TileEntity implements IWrenchable
     @Override
     public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side)
     {
-        return ((side > 1 && side != this.orientation.ordinal()) ? true : false);
+        return ((side > 1 && side != orientation.ordinal()) ? true : false);
     }
 
     @Override
@@ -83,7 +65,7 @@ public class TileEntityBaseMachine extends TileEntity implements IWrenchable
     @Override
     public boolean wrenchCanRemove(EntityPlayer entityPlayer)
     {
-        return (this.orientation.ordinal() > 1 ? true : false);
+        return (orientation.ordinal() > 1 ? true : false);
     }
 
     @Override
@@ -99,10 +81,29 @@ public class TileEntityBaseMachine extends TileEntity implements IWrenchable
     }
 
 
+    // Tile Entity orientation stuff
+    public ForgeDirection getOrientation()
+    {
+        return orientation;
+    }
+
+    public void setOrientation(Object orientation)
+    {
+        if(orientation instanceof Integer)
+        {
+            this.orientation = ForgeDirection.getOrientation((Integer)orientation);
+        }
+        if(orientation instanceof ForgeDirection)
+        {
+            this.orientation = (ForgeDirection)orientation;
+        }
+    }
+
+
     // Network Stuff
-    /*@Override
+    @Override
     public Packet getDescriptionPacket()
     {
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityCobbleGenerator(null));
-    }*/
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityBaseMachine(this));
+    }
 }

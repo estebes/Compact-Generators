@@ -15,6 +15,7 @@ public class BlockInit
     public static final BaseBlock mark4MachineCasing = new BaseBlock(Reference.LOWERCASE_MOD_ID + ":" + "Mark4MachineCasing");
     public static final BlockBaseMachine cobbleMachine = new BlockBaseMachine();
     public static final BlockTreeHarvester treeHarvester = new BlockTreeHarvester();
+    public static final EnergyItemBuffer energyItemBuffer = new EnergyItemBuffer();
 
     public static void init()
     {
@@ -34,5 +35,7 @@ public class BlockInit
         //GameRegistry.registerBlock(cobbleMachine, CobbleItemMachine.class, "CobbleMachineBlock");
         treeHarvester.setBlockName("ResinFarm");
         GameRegistry.registerBlock(treeHarvester, "Tree Harvester");
+
+        GameRegistry.registerBlock(energyItemBuffer, "Roflcopter");
     }
 }

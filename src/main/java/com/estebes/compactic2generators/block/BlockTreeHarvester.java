@@ -2,8 +2,7 @@ package com.estebes.compactic2generators.block;
 
 import com.estebes.compactic2generators.CompactIC2Genenators;
 import com.estebes.compactic2generators.reference.Reference;
-import com.estebes.compactic2generators.tileentity.TileEntityCobbleMachine;
-import com.estebes.compactic2generators.tileentity.TileEntityTreeHarvester;
+import com.estebes.compactic2generators.tileentity.machine.TileEntityTreeHarvester;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.item.IC2Items;
@@ -22,7 +21,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockTreeHarvester extends BlockContainer

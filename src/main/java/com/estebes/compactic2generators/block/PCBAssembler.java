@@ -2,7 +2,7 @@ package com.estebes.compactic2generators.block;
 
 import com.estebes.compactic2generators.CompactIC2Genenators;
 import com.estebes.compactic2generators.reference.Reference;
-import com.estebes.compactic2generators.tileentity.TileEntityPCBAssembler;
+import com.estebes.compactic2generators.tileentity.machine.TileEntityPCBAssembler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;

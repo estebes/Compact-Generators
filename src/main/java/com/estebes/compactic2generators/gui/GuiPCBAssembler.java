@@ -1,18 +1,10 @@
 package com.estebes.compactic2generators.gui;
 
-import com.estebes.compactic2generators.inventory.ContainerCobbleGenerator;
 import com.estebes.compactic2generators.inventory.ContainerPCBAssembler;
 import com.estebes.compactic2generators.reference.Reference;
-import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
-import com.estebes.compactic2generators.tileentity.TileEntityPCBAssembler;
-import ic2.api.item.IC2Items;
+import com.estebes.compactic2generators.tileentity.machine.TileEntityPCBAssembler;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 

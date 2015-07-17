@@ -2,9 +2,7 @@ package com.estebes.compactic2generators.renderer.blocks;
 
 import com.estebes.compactic2generators.model.ModelSimpleGenerator;
 import com.estebes.compactic2generators.reference.Reference;
-import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
-import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
-import com.estebes.compactic2generators.tileentity.TileEntityPCBAssembler;
+import com.estebes.compactic2generators.tileentity.machine.TileEntityPCBAssembler;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

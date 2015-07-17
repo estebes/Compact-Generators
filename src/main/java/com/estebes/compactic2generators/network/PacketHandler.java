@@ -1,9 +1,6 @@
 package com.estebes.compactic2generators.network;
 
-import com.estebes.compactic2generators.network.message.MessageTileEntityCobbleMachine;
-import com.estebes.compactic2generators.network.message.MessageTileEntityPCBAssembler;
-import com.estebes.compactic2generators.network.message.MessageTileEntitySimpleGenerator;
-import com.estebes.compactic2generators.network.message.MessageTileEntityTreeHarvester;
+import com.estebes.compactic2generators.network.message.*;
 import com.estebes.compactic2generators.reference.Reference;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -19,6 +16,7 @@ public class PacketHandler
         INSTANCE.registerMessage(MessageTileEntityCobbleMachine.class, MessageTileEntityCobbleMachine.class, 1, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileEntityPCBAssembler.class, MessageTileEntityPCBAssembler.class, 2, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileEntityTreeHarvester.class, MessageTileEntityTreeHarvester.class, 3, Side.CLIENT);
-
+        INSTANCE.registerMessage(MessageTileEntityBaseMachine.class, MessageTileEntityBaseMachine.class, 4, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileEntityEnergyMachine.class, MessageTileEntityEnergyMachine.class, 5, Side.CLIENT);
     }
 }

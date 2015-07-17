@@ -1,7 +1,6 @@
 package com.estebes.compactic2generators.inventory;
 
-import com.estebes.compactic2generators.tileentity.TileEntityCobbleGenerator;
-import com.estebes.compactic2generators.tileentity.TileEntityPCBAssembler;
+import com.estebes.compactic2generators.tileentity.machine.TileEntityPCBAssembler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

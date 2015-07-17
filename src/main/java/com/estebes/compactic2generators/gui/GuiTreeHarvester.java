@@ -2,7 +2,7 @@ package com.estebes.compactic2generators.gui;
 
 import com.estebes.compactic2generators.inventory.ContainerTreeHarvester;
 import com.estebes.compactic2generators.reference.Reference;
-import com.estebes.compactic2generators.tileentity.TileEntityTreeHarvester;
+import com.estebes.compactic2generators.tileentity.machine.TileEntityTreeHarvester;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
